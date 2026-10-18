@@ -1,8 +1,9 @@
+
 # Selviytymiskori
 
 **Varaudu paremmin. Selviydy pidemmälle.**
 
-Selviytymiskori on Reactilla ja Vitellä toteutettu visuaalinen ostoslista arkeen ja varautumiseen. Sovelluksen tavoitteena on tarjota helppokäyttöinen tapa hallita ostettavia tuotteita ilman kirjautumista tai rekisteröitymistä.
+Selviytymiskori on Reactilla ja Vitellä toteutettu maksuton ostoslistasovellus, joka on kehitetty harrasteprojektina. Sovellus yhdistää helppokäyttöisen ostoslistan postapokalyptiseen visuaaliseen ilmeeseen ja tarjoaa yksinkertaisen tavan hallita ostettavia tuotteita ilman kirjautumista tai rekisteröitymistä.
 
 ## Ominaisuudet
 
@@ -10,9 +11,9 @@ Selviytymiskori on Reactilla ja Vitellä toteutettu visuaalinen ostoslista arkee
 - **Ostosten hallinta** – lisää tuotteita listalle ja merkitse ne ostetuiksi.
 - **Tuotteiden poistaminen** – ostamattoman tuotteen voi poistaa listalta.
 - **Edistymisen seuranta** – näe ostettujen ja vielä hankittavien tuotteiden määrä.
-- **Automaattinen tallennus** – ostoslista tallentuu selaimen paikalliseen tallennustilaan.
-- **Responsiivinen käyttöliittymä** – soveltuu sekä tietokoneelle että mobiililaitteille.
-- **PWA-tuki** – sovellus voidaan asentaa tuetuilla selaimilla, ja staattisia resursseja voidaan käyttää offline-tilassa.
+- **Automaattinen tallennus** – ostoslista tallentuu selaimen paikalliseen `localStorage`-tallennustilaan.
+- **Responsiivinen käyttöliittymä** – käyttöliittymä mukautuu tietokoneille ja mobiililaitteille.
+- **PWA-tuki** – sovellus voidaan asentaa tuetuilla selaimilla. Service workerin välimuistitus mahdollistaa määritettyjen resurssien käytön myös offline-tilassa.
 
 ## Teknologiat
 
@@ -37,7 +38,7 @@ Käynnistä kehityspalvelin:
 npm run dev
 ```
 
-Tarkista koodi:
+Tarkista koodi ESLintillä:
 
 ```bash
 npm run lint
@@ -49,10 +50,14 @@ Luo tuotantoversio:
 npm run build
 ```
 
+Tuotantoversion tiedostot luodaan `dist`-hakemistoon.
+
 ## Tallennus ja tietosuoja
 
-Sovellus ei edellytä käyttäjätiliä eikä omaa backend-palvelinta tai tietokantaa. Ostoslista tallennetaan selaimen `localStorage`-tallennukseen, joten tiedot ovat selainkohtaisia eivätkä synkronoidu automaattisesti muiden laitteiden välillä.
+Sovellus ei edellytä käyttäjätiliä eikä käytä omaa backend-palvelinta tai tietokantaa. Ostoslista tallennetaan käyttäjän selaimen `localStorage`-tallennustilaan, joten tiedot ovat selainkohtaisia eivätkä synkronoidu automaattisesti muiden laitteiden välillä.
+
+Selaimen tallennustietojen tyhjentäminen voi poistaa tallennetun ostoslistan. Verkkopalvelun hosting-palveluntarjoaja voi lisäksi käsitellä palvelun tekniseen toimintaan liittyviä tietoja, kuten palvelinlokeja.
 
 ## Tavoite
 
-Selviytymiskori yhdistää selkeän ostoslistan ja omaleimaisen postapokalyptisen visuaalisen ilmeen helposti käytettäväksi verkkosovellukseksi.
+Selviytymiskori yhdistää selkeän ostoslistan, käytännölliset toiminnot ja omaleimaisen postapokalyptisen visuaalisen ilmeen helposti käytettäväksi verkkosovellukseksi.
