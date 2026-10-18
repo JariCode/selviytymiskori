@@ -144,7 +144,7 @@ function Etusivu({ onAvaaLista, ostamatta, tuotteita }) {
           <span className="vihrea-teksti">01</span> / KIRJAA TARPEET
         </span>
         <span>
-          <span className="vihrea-teksti">02</span> / MERKITSE OSTETUT
+          <span className="vihrea-teksti">02</span> / MERKITSE KERÄTYT
         </span>
         <span>
           <span className="vihrea-teksti">03</span> / PIDÄ LISTA AJAN TASALLA

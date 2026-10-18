@@ -46,7 +46,7 @@ function Ostoslista({
           </h1>
 
           <p>
-            Lisää ostettavat tuotteet ja merkitse ne hankituiksi.
+            Lisää ostettavat tuotteet ja merkitse ne kerätyiksi.
           </p>
         </div>
 
