@@ -1,0 +1,176 @@
+import { useEffect, useMemo, useState } from 'react'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Etusivu from './components/Etusivu'
+import Ostoslista from './components/Ostoslista'
+import Ilmoitus from './components/Ilmoitus'
+import TietosuojaModal from './components/TietosuojaModal'
+import './App.css'
+
+const STORAGE_KEY = 'selviytymiskori-ostokset-v1'
+
+function lueTallennettuLista() {
+  try {
+    const tallennettu = localStorage.getItem(STORAGE_KEY)
+    const lista = tallennettu ? JSON.parse(tallennettu) : []
+
+    if (!Array.isArray(lista)) {
+      return []
+    }
+
+    return lista
+      .filter(
+        (tuote) =>
+          tuote &&
+          typeof tuote.id === 'string' &&
+          typeof tuote.nimi === 'string'
+      )
+      .map((tuote) => ({
+        id: tuote.id,
+        nimi: tuote.nimi,
+        ostettu: tuote.ostettu === true
+      }))
+  } catch {
+    return []
+  }
+}
+
+function App() {
+  const [nakyma, setNakyma] = useState('etusivu')
+  const [tuotteet, setTuotteet] = useState(lueTallennettuLista)
+  const [uusiTuote, setUusiTuote] = useState('')
+  const [ilmoitus, setIlmoitus] = useState('')
+  const [tietosuojaAuki, setTietosuojaAuki] = useState(false)
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tuotteet))
+    } catch {
+      setIlmoitus(
+        'Tallennus ei onnistunut. Tarkista selaimen tallennustila-asetukset.'
+      )
+    }
+  }, [tuotteet])
+
+  useEffect(() => {
+    if (!ilmoitus) return undefined
+
+    const ajastin = window.setTimeout(() => {
+      setIlmoitus('')
+    }, 3000)
+
+    return () => window.clearTimeout(ajastin)
+  }, [ilmoitus])
+
+  const ostamatta = useMemo(
+    () => tuotteet.filter((tuote) => !tuote.ostettu).length,
+    [tuotteet]
+  )
+
+  const ostettu = tuotteet.length - ostamatta
+
+  const edistyminen = tuotteet.length
+    ? Math.round((ostettu / tuotteet.length) * 100)
+    : 0
+
+  function naytaIlmoitus(teksti) {
+    setIlmoitus(teksti)
+  }
+
+  function lisaaTuote(event) {
+    event.preventDefault()
+
+    const nimi = uusiTuote.trim()
+
+    if (!nimi) return
+
+    const uusi = {
+      id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      nimi,
+      ostettu: false
+    }
+
+    setTuotteet((nykyiset) => [...nykyiset, uusi])
+    setUusiTuote('')
+    naytaIlmoitus(`${nimi} lisätty ostoslistalle.`)
+  }
+
+  function vaihdaTila(id) {
+    setTuotteet((nykyiset) =>
+      nykyiset.map((tuote) =>
+        tuote.id === id
+          ? { ...tuote, ostettu: !tuote.ostettu }
+          : tuote
+      )
+    )
+  }
+
+  function poistaTuote(id) {
+    const tuote = tuotteet.find((rivi) => rivi.id === id)
+
+    if (!tuote || tuote.ostettu) return
+
+    setTuotteet((nykyiset) =>
+      nykyiset.filter((rivi) => rivi.id !== id)
+    )
+
+    naytaIlmoitus('Tuote poistettu ostoslistalta.')
+  }
+
+  function tyhjennaLista() {
+    if (!tuotteet.length) return
+
+    const vahvistus = window.confirm(
+      'Haluatko varmasti tyhjentää koko ostoslistan? Tätä ei voi perua.'
+    )
+
+    if (!vahvistus) return
+
+    setTuotteet([])
+    naytaIlmoitus('Ostoslista tyhjennetty.')
+  }
+
+  return (
+    <div className="sovellus">
+      <div className="taustakuvio" aria-hidden="true" />
+
+      <Header onEtusivu={() => setNakyma('etusivu')} />
+
+      <main id="sisalto">
+        {nakyma === 'etusivu' ? (
+          <Etusivu
+            onAvaaLista={() => setNakyma('lista')}
+            ostamatta={ostamatta}
+            tuotteita={tuotteet.length}
+          />
+        ) : (
+          <Ostoslista
+            tuotteet={tuotteet}
+            uusiTuote={uusiTuote}
+            setUusiTuote={setUusiTuote}
+            lisaaTuote={lisaaTuote}
+            vaihdaTila={vaihdaTila}
+            poistaTuote={poistaTuote}
+            tyhjennaLista={tyhjennaLista}
+            ostamatta={ostamatta}
+            ostettu={ostettu}
+            edistyminen={edistyminen}
+            onTakaisin={() => setNakyma('etusivu')}
+          />
+        )}
+      </main>
+
+      <Ilmoitus teksti={ilmoitus} />
+
+      <Footer onAvaaTietosuoja={() => setTietosuojaAuki(true)} />
+
+      {tietosuojaAuki && (
+        <TietosuojaModal
+          onSulje={() => setTietosuojaAuki(false)}
+        />
+      )}
+    </div>
+  )
+}
+
+export default App
