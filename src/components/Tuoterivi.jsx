@@ -1,3 +1,4 @@
+
 import { Check, X } from 'lucide-react'
 
 function Tuoterivi({ tuote, indeksi, onVaihdaTila, onPoista }) {
@@ -27,7 +28,7 @@ function Tuoterivi({ tuote, indeksi, onVaihdaTila, onPoista }) {
       </label>
 
       {tuote.ostettu ? (
-        <span className="hankittu-merkinta">OSTETTU</span>
+        <span className="hankittu-merkinta">KORISSA</span>
       ) : (
         <button
           className="poista-tuote"

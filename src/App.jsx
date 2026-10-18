@@ -1,3 +1,4 @@
+
 import { useEffect, useMemo, useState } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -5,6 +6,7 @@ import Etusivu from './components/Etusivu'
 import Ostoslista from './components/Ostoslista'
 import Ilmoitus from './components/Ilmoitus'
 import TietosuojaModal from './components/TietosuojaModal'
+import VahvistusModal from './components/VahvistusModal'
 import './App.css'
 
 const STORAGE_KEY = 'selviytymiskori-ostokset-v1'
@@ -41,6 +43,7 @@ function App() {
   const [uusiTuote, setUusiTuote] = useState('')
   const [ilmoitus, setIlmoitus] = useState('')
   const [tietosuojaAuki, setTietosuojaAuki] = useState(false)
+  const [vahvistusAuki, setVahvistusAuki] = useState(false)
 
   useEffect(() => {
     try {
@@ -120,13 +123,12 @@ function App() {
   function tyhjennaLista() {
     if (!tuotteet.length) return
 
-    const vahvistus = window.confirm(
-      'Haluatko varmasti tyhjentää koko ostoslistan? Tätä ei voi perua.'
-    )
+    setVahvistusAuki(true)
+  }
 
-    if (!vahvistus) return
-
+  function vahvistaTyhjennys() {
     setTuotteet([])
+    setVahvistusAuki(false)
     naytaIlmoitus('Ostoslista tyhjennetty.')
   }
 
@@ -167,6 +169,13 @@ function App() {
       {tietosuojaAuki && (
         <TietosuojaModal
           onSulje={() => setTietosuojaAuki(false)}
+        />
+      )}
+
+      {vahvistusAuki && (
+        <VahvistusModal
+          onVahvista={vahvistaTyhjennys}
+          onPeruuta={() => setVahvistusAuki(false)}
         />
       )}
     </div>

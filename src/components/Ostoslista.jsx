@@ -1,3 +1,4 @@
+
 import {
   ArrowLeft,
   CheckCheck,
@@ -88,7 +89,7 @@ function Ostoslista({
         <div className="edistyminen-teksti">
           <span>OSTOKSET</span>
           <span>
-            {ostettu} / {tuotteet.length} OSTETTU
+            {ostettu} / {tuotteet.length} KORISSA
           </span>
         </div>
 
@@ -151,11 +152,11 @@ function Ostoslista({
       <div className="listan-alatunniste">
         <span>
           <CheckCheck size={15} />
-          {ostettu} OSTETTU
+          {ostettu} KORISSA
         </span>
         <span>
           <CircleAlert size={15} />
-          {ostamatta} OSTAMATTA
+          {ostamatta} KERÄÄMÄTTÄ
         </span>
       </div>
 

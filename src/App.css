@@ -1308,3 +1308,220 @@ main {
     padding: 18px;
   }
 }
+
+
+/* Ostoslistan tyhjennyksen vahvistus */
+
+.vahvistus-tausta {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgb(0 0 0 / 78%);
+  backdrop-filter: blur(6px);
+  animation: vahvistus-tausta-sisaan 180ms ease-out;
+}
+
+.vahvistus-modal {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding: 32px;
+  color: #e8eadf;
+  background: #151812;
+  border: 1px solid #414833;
+  border-radius: 12px;
+  box-shadow: 0 24px 80px rgb(0 0 0 / 55%);
+  animation: vahvistus-modal-sisaan 200ms ease-out;
+}
+
+.vahvistus-kuvake {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 22px;
+  place-items: center;
+  color: #ff8277;
+  background: rgb(181 56 44 / 14%);
+  border: 1px solid rgb(181 56 44 / 38%);
+  border-radius: 10px;
+}
+
+.vahvistus-sulje {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  color: #a5a99b;
+  background: transparent;
+  border: 1px solid #34392d;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.vahvistus-sulje:hover {
+  color: #ffffff;
+  background: #292d23;
+}
+
+.vahvistus-tunniste {
+  display: block;
+  margin-bottom: 9px;
+  color: #d58b80;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.vahvistus-modal h2 {
+  margin: 0 0 12px;
+  color: #f1f2e9;
+  font-size: clamp(1.35rem, 4vw, 1.65rem);
+  line-height: 1.25;
+}
+
+.vahvistus-modal p {
+  margin: 0;
+  color: #b5b9aa;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.vahvistus-toiminnot {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.vahvistus-toiminnot button {
+  min-height: 46px;
+  padding: 0 15px;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 7px;
+  cursor: pointer;
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+.vahvistus-toiminnot button:active {
+  transform: scale(0.98);
+}
+
+.vahvistus-peruuta {
+  flex: 1;
+  color: #e2e5d9;
+  background: #22261d;
+  border: 1px solid #454b39;
+}
+
+.vahvistus-peruuta:hover {
+  background: #303628;
+  border-color: #697255;
+}
+
+.vahvistus-hyvaksy {
+  flex: 1.25;
+  color: #ffffff;
+  background: #8e3028;
+  border: 1px solid #a54136;
+}
+
+.vahvistus-hyvaksy:hover {
+  background: #a33b31;
+}
+
+.vahvistus-modal button:focus-visible {
+  outline: 2px solid #b8d785;
+  outline-offset: 3px;
+}
+
+@keyframes vahvistus-tausta-sisaan {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes vahvistus-modal-sisaan {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 420px) {
+  .vahvistus-modal {
+    padding: 25px 20px;
+  }
+
+  .vahvistus-toiminnot {
+    flex-direction: column-reverse;
+  }
+
+  .vahvistus-toiminnot button {
+    min-height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vahvistus-tausta,
+  .vahvistus-modal {
+    animation: none;
+  }
+
+  .vahvistus-toiminnot button {
+    transition: none;
+  }
+}
+
+
+/* Tietosuojamodaalin teemaan sopiva vierityspalkki */
+
+.tietosuoja-modal {
+  scrollbar-width: thin;
+  scrollbar-color: #59634a #171a15;
+}
+
+.tietosuoja-modal::-webkit-scrollbar {
+  width: 10px;
+}
+
+.tietosuoja-modal::-webkit-scrollbar-track {
+  background: #171a15;
+  border-left: 1px solid #292e23;
+}
+
+.tietosuoja-modal::-webkit-scrollbar-thumb {
+  background: #59634a;
+  border: 2px solid #171a15;
+  border-radius: 10px;
+}
+
+.tietosuoja-modal::-webkit-scrollbar-thumb:hover {
+  background: #b5d957;
+}
+
+.tietosuoja-modal::-webkit-scrollbar-corner {
+  background: #171a15;
+}
+
+
