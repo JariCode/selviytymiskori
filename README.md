@@ -63,6 +63,7 @@ Selaimen tallennustietojen tyhjentäminen voi poistaa tallennetun ostoslistan. V
 - **Ei ulkoisia resursseja** – sovellus ei käytä ulkoisia fontteja, CDN-palveluita eikä analytiikkaa.
 - **Tallennetun datan tarkistus** – selaimesta luettu ostoslista validoidaan ennen käyttöä, ja virheellinen data ohitetaan.
 - **Näppäimistötuki** – modaali-ikkunat sulkeutuvat Esc-näppäimellä, ja fokus pysyy modaalin sisällä.
+- **Palvelimen tietoturvaotsakkeet** – `public/.htaccess` estää sivun upottamisen muille sivustoille ja lisää palvelimelle perustietoturvaotsakkeet.
 
 ## Tavoite
 
