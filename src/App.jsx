@@ -1,4 +1,3 @@
-
 import { useEffect, useMemo, useState } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -41,7 +40,7 @@ function App() {
   const [nakyma, setNakyma] = useState('etusivu')
   const [tuotteet, setTuotteet] = useState(lueTallennettuLista)
   const [uusiTuote, setUusiTuote] = useState('')
-  const [ilmoitus, setIlmoitus] = useState('')
+  const [ilmoitus, setIlmoitus] = useState(null)
   const [tietosuojaAuki, setTietosuojaAuki] = useState(false)
   const [vahvistusAuki, setVahvistusAuki] = useState(false)
 
@@ -49,9 +48,10 @@ function App() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(tuotteet))
     } catch {
-      setIlmoitus(
-        'Tallennus ei onnistunut. Tarkista selaimen tallennustila-asetukset.'
-      )
+      setIlmoitus({
+        teksti: 'Tallennus ei onnistunut. Tarkista selaimen tallennustila-asetukset.',
+        aika: Date.now()
+      })
     }
   }, [tuotteet])
 
@@ -59,7 +59,7 @@ function App() {
     if (!ilmoitus) return undefined
 
     const ajastin = window.setTimeout(() => {
-      setIlmoitus('')
+      setIlmoitus(null)
     }, 3000)
 
     return () => window.clearTimeout(ajastin)
@@ -77,7 +77,7 @@ function App() {
     : 0
 
   function naytaIlmoitus(teksti) {
-    setIlmoitus(teksti)
+    setIlmoitus({ teksti, aika: Date.now() })
   }
 
   function lisaaTuote(event) {
@@ -162,7 +162,7 @@ function App() {
         )}
       </main>
 
-      <Ilmoitus teksti={ilmoitus} />
+      <Ilmoitus teksti={ilmoitus?.teksti} />
 
       <Footer onAvaaTietosuoja={() => setTietosuojaAuki(true)} />
 
