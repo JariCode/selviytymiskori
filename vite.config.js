@@ -21,8 +21,8 @@ function cspPlugin() {
     apply: 'build',
     transformIndexHtml(html) {
       return html.replace(
-        '<head>',
-        `<head>\n    <meta http-equiv="Content-Security-Policy" content="${csp}" />`
+        '<meta charset="UTF-8" />',
+        `<meta charset="UTF-8" />\n    <meta http-equiv="Content-Security-Policy" content="${csp}" />`
       )
     }
   }
