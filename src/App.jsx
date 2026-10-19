@@ -29,7 +29,7 @@ function lueTallennettuLista() {
       )
       .map((tuote) => ({
         id: tuote.id,
-        nimi: tuote.nimi,
+        nimi: tuote.nimi.slice(0, 100),
         ostettu: tuote.ostettu === true
       }))
   } catch {
