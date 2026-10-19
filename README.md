@@ -1,4 +1,3 @@
-
 # Selviytymiskori
 
 **Varaudu paremmin. Selviydy pidemmälle.**
@@ -57,6 +56,13 @@ Tuotantoversion tiedostot luodaan `dist`-hakemistoon.
 Sovellus ei edellytä käyttäjätiliä eikä käytä omaa backend-palvelinta tai tietokantaa. Ostoslista tallennetaan käyttäjän selaimen `localStorage`-tallennustilaan, joten tiedot ovat selainkohtaisia eivätkä synkronoidu automaattisesti muiden laitteiden välillä.
 
 Selaimen tallennustietojen tyhjentäminen voi poistaa tallennetun ostoslistan. Verkkopalvelun hosting-palveluntarjoaja voi lisäksi käsitellä palvelun tekniseen toimintaan liittyviä tietoja, kuten palvelinlokeja.
+
+## Tietoturva ja saavutettavuus
+
+- **Content Security Policy** – tuotantoversio sallii skriptien, tyylien ja kuvien lataamisen vain sovelluksen omasta osoitteesta.
+- **Ei ulkoisia resursseja** – sovellus ei käytä ulkoisia fontteja, CDN-palveluita eikä analytiikkaa.
+- **Tallennetun datan tarkistus** – selaimesta luettu ostoslista validoidaan ennen käyttöä, ja virheellinen data ohitetaan.
+- **Näppäimistötuki** – modaali-ikkunat sulkeutuvat Esc-näppäimellä, ja fokus pysyy modaalin sisällä.
 
 ## Tavoite
 
