@@ -2,11 +2,38 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
+const csp = [
+  "default-src 'self'",
+  "script-src 'self'",
+  "style-src 'self'",
+  "img-src 'self' data:",
+  "connect-src 'self'",
+  "manifest-src 'self'",
+  "worker-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'none'"
+].join('; ')
+
+function cspPlugin() {
+  return {
+    name: 'csp-meta',
+    apply: 'build',
+    transformIndexHtml(html) {
+      return html.replace(
+        '<head>',
+        `<head>\n    <meta http-equiv="Content-Security-Policy" content="${csp}" />`
+      )
+    }
+  }
+}
+
 export default defineConfig({
   base: '/selviytymiskori/',
 
   plugins: [
     react(),
+    cspPlugin(),
 
     VitePWA({
       registerType: 'autoUpdate',
