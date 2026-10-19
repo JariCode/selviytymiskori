@@ -1,7 +1,9 @@
-
 import { AlertTriangle, X } from 'lucide-react'
+import useModaali from '../hooks/useModaali'
 
 function VahvistusModal({ onVahvista, onPeruuta }) {
+  const modaaliRef = useModaali(onPeruuta)
+
   return (
     <div
       className="vahvistus-tausta"
@@ -12,6 +14,7 @@ function VahvistusModal({ onVahvista, onPeruuta }) {
       }}
     >
       <section
+        ref={modaaliRef}
         className="vahvistus-modal"
         role="alertdialog"
         aria-modal="true"
@@ -57,7 +60,6 @@ function VahvistusModal({ onVahvista, onPeruuta }) {
             className="vahvistus-hyvaksy"
             type="button"
             onClick={onVahvista}
-            autoFocus
           >
             TYHJENNÄ LISTA
           </button>

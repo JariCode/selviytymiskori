@@ -1,7 +1,9 @@
-
 import { X, ShieldCheck } from 'lucide-react'
+import useModaali from '../hooks/useModaali'
 
 function TietosuojaModal({ onSulje }) {
+  const modaaliRef = useModaali(onSulje)
+
   return (
     <div
       className="modal-tausta"
@@ -12,6 +14,7 @@ function TietosuojaModal({ onSulje }) {
       }}
     >
       <section
+        ref={modaaliRef}
         className="tietosuoja-modal"
         role="dialog"
         aria-modal="true"
