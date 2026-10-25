@@ -27,19 +27,19 @@ function Tuoterivi({ tuote, indeksi, onVaihdaTila, onPoista }) {
         <span className="tuote-nimi">{tuote.nimi}</span>
       </label>
 
-      {tuote.ostettu ? (
+      {tuote.ostettu && (
         <span className="hankittu-merkinta">KORISSA</span>
-      ) : (
-        <button
-          className="poista-tuote"
-          type="button"
-          onClick={() => onPoista(tuote.id)}
-          aria-label={`Poista ${tuote.nimi}`}
-          title="Poista tuote"
-        >
-          <X size={19} />
-        </button>
       )}
+
+      <button
+        className="poista-tuote"
+        type="button"
+        onClick={() => onPoista(tuote.id)}
+        aria-label={`Poista ${tuote.nimi}`}
+        title="Poista tuote"
+      >
+        <X size={19} />
+      </button>
     </div>
   )
 }

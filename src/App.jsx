@@ -111,7 +111,7 @@ function App() {
   function poistaTuote(id) {
     const tuote = tuotteet.find((rivi) => rivi.id === id)
 
-    if (!tuote || tuote.ostettu) return
+    if (!tuote) return
 
     setTuotteet((nykyiset) =>
       nykyiset.filter((rivi) => rivi.id !== id)

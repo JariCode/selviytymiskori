@@ -162,7 +162,7 @@ function Ostoslista({
 
       <p className="poisto-ohje">
         <CircleAlert size={14} />
-        Koriin lisätyn tuotteen poistaminen onnistuu, kun poistat ensin valinnan.
+        Poista yksittäinen tuote painamalla X-painiketta.
       </p>
     </section>
   )
