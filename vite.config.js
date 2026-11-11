@@ -29,7 +29,7 @@ function cspPlugin() {
 }
 
 export default defineConfig({
-  base: '/selviytymiskori/',
+  base: '/',
 
   plugins: [
     react(),
@@ -40,14 +40,14 @@ export default defineConfig({
       includeAssets: ['selviytymiskori.svg'],
 
       manifest: {
-        id: '/selviytymiskori/',
+        id: '/',
         name: 'Selviytymiskori',
         short_name: 'Selviytymiskori',
         description:
           'Helppokäyttöinen ostoslista arkeen ja varautumiseen.',
         lang: 'fi',
-        start_url: '/selviytymiskori/',
-        scope: '/selviytymiskori/',
+        start_url: '/',
+        scope: '/',
         display: 'standalone',
         background_color: '#10120f',
         theme_color: '#10120f',

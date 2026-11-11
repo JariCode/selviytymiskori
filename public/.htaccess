@@ -1,6 +1,11 @@
+# Estetään kansioiden sisällön listaus
+Options -Indexes
+
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "DENY"
+  # Pakotetaan https vuodeksi
+  Header always set Strict-Transport-Security "max-age=31536000"
   # Vain sovelluksen omat tiedostot. PWA tarvitsee manifest- ja worker-src-säännöt
   # (asennus ja offline-toiminta), kuvat voivat olla data:- tai blob:-muodossa.
   Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
